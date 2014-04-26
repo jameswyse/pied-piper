@@ -96,7 +96,7 @@ process.stdin
 
   // Or as static methods:
   stream.count(process.stdin function(resultObject) { })
-  stream.out()
+  stream.out(process.stdin)
 ```
 
 ## Licence
