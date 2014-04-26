@@ -1,0 +1,38 @@
+{
+  "name": "pied-piper",
+  "version": "0.0.1",
+  "description": "Stream utilities for node.",
+  "main": "lib/index.js",
+  "dependencies": {
+    "require-all": "0.0.x",
+    "multipipe": "0.0.x",
+    "through2": "0.4.x",
+    "through2-filter": "1.3.x",
+    "through2-map": "1.2.x",
+    "split2": "0.1.x",
+    "duplexer2": "0.0.x",
+    "through2-spy": "1.1.x",
+    "from2": "0.0.x",
+    "gutter": "1.0.x",
+    "simple-jsonstream": "0.2.x"
+  },
+  "devDependencies": {},
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jameswyse/pied-piper"
+  },
+  "keywords": [
+    "steams",
+    "streams2",
+    "transform",
+    "pipe",
+    "pipeline"
+  ],
+  "author": "James Wyse <james@jameswyse.net>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jameswyse/pied-piper/issues"
+  },
+  "homepage": "https://github.com/jameswyse/pied-piper"
+}
