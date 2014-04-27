@@ -66,25 +66,41 @@ process.stdin
 ## Quick & Dirty API Reference
 
 ```javascript
-  // Create a new stream pipeline from 0 or more streams
-  // Streams can any of type that makes sense in a pipeline.
-  stream();
-  stream(input, transform1, transform2, output);
-  stream(transform1, transform2, transform3, etc);
+  //
+  // Creates a new stream pipeline.
+  //
+  // Streams passed as arguments will be piped together.
+  // If no stream is provided it will create a through stream.
+  //
+  // The streams can be of any type so long as it makes sense to
+  // pipe them together. Eg: the 2nd and subsequent arguments
+  // should be writable and all but the last should be readable.
+  //
+  // These would work:
+  //
+  var through   = stream();
+  var pipeline  = stream(readable, transform, transform, writable);
+  var transform = stream(transform, transform, transform);
 
-  // Inputs
+  // If your first stream is writable then you can pipe to it:
+  process.stdin.pipe(transform.toStream())
+
+  // If the last stream is readable then you can pipe from it:
+  transform.pipe(process.stdout);
+
+  // Input Streams
   stream.readFile(filename);
   stream.readObject(object);
   stream.readArray(array);
   stream.stdin();
 
-  // Outputs
+  // Output Streams
   stream.writeFile(filename);
   stream.stdout();
   stream.stderr();
   stream.collect(function(array) {});
 
-  // Transforms
+  // Transform Streams
   stream()
     .append('string')
     .each(function(chunk) { })
@@ -103,18 +119,18 @@ process.stdin
     .toUpperCase()
     .createHash('md5');
 
-  // Or as static methods:
+  // Or
   stream.append('string');
   stream.skip(10);
   // etc
 
-  // Consumers
-  // When using as static methods pass the stream as the first argument.
+  // Consumer functions
+  // When used statically the first argument is the Stream to be consumed
   stream()
     .count(function(resultObject) { });
 
-  // Or as static methods:
-  stream.count(process.stdin function(resultObject) { });
+  // Or
+  stream.count(process.stdin, function(resultObject) { });
 ```
 
 ## Licence
