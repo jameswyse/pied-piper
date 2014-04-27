@@ -1,7 +1,7 @@
 {
   "name": "pied-piper",
-  "version": "0.1.0",
-  "description": "Stream utilities for node.",
+  "version": "0.1.1",
+  "description": "Stream and pipeline utilities for node.js",
   "main": "lib/index.js",
   "dependencies": {
     "require-all": "0.0.x",
