@@ -1,3 +1,5 @@
+![pied-piper](https://raw.githubusercontent.com/jameswyse/pied-piper/master/docs/images/pied-piper.png)
+
 # pied-piper
 *Stream utilities for node*
 
