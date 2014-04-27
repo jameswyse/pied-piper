@@ -1,6 +1,6 @@
 {
   "name": "pied-piper",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Stream utilities for node.",
   "main": "lib/index.js",
   "dependencies": {
