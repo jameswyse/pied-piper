@@ -26,9 +26,9 @@ stream()
 //
 // Stream style
 //
-stream.readFile(resolve('LICENCE'))
+stream.readFile(resolve('LICENSE'))
   .pipe(stream.createHash('md5'))
-  .pipe(stream.prepend('LICENCE: '))
+  .pipe(stream.prepend('LICENSE: '))
   .pipe(stream.append('\n'))
   .pipe(process.stdout);
 

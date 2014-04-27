@@ -1,19 +1,19 @@
 ![pied-piper](https://raw.githubusercontent.com/jameswyse/pied-piper/master/docs/images/pied-piper.png)
 
 # pied-piper
-*Stream utilities for node*
+*Stream and pipeline utilities for node.js*
 
 ## Install
 ```bash
 $ npm install --save pied-piper
 ```
 
-## Usage Examples
+## Examples
 ```javascript
 var stream = require('pied-piper');
 
 //
-// Pipeline
+// Pipeline Style
 //
 stream(
   process.stdin,
@@ -24,17 +24,28 @@ stream(
 );
 
 //
-// Chaining
+// Chaining Style
 //
-stream(process.stdin)
+stream()
+  .stdin()
   .split()
   .filter(function(chunk) { return chunk && chunk != '' })
   .prepend('-> ')
   .append(' <-\n')
-  .pipe(process.stdout);
+  .stdout();
 
 //  
-// Mixed with native Streams
+// Stream Style
+//
+process.stdin
+  .pipe(stream.split())
+  .pipe(stream.filter(function(chunk) { return chunk && chunk != '' }))
+  .pipe(stream.prepend('-> '))
+  .pipe(stream.append(' <-\n'))
+  .pipe(process.stdout);
+
+//
+// Mix 'n' Match Style
 //
 var getLines = stream()
   .split()
@@ -49,7 +60,7 @@ var makePretty = stream(
 process.stdin
   .pipe(getLines)
   .pipe(makePretty)
-  .pipe(process.stdout);
+  .pipe(stream.stdout);
 ```
 
 ## Quick & Dirty API Reference
@@ -57,8 +68,9 @@ process.stdin
 ```javascript
   // Create a new stream pipeline from 0 or more streams
   // Streams can any of type that makes sense in a pipeline.
-  stream()
+  stream();
   stream(input, transform1, transform2, output);
+  stream(transform1, transform2, transform3, etc);
 
   // Inputs
   stream.readFile(filename);
@@ -74,7 +86,7 @@ process.stdin
 
   // Transforms
   stream()
-    .append('string');
+    .append('string')
     .each(function(chunk) { })
     .filter(function(chunk) { return true; })
     .invoke('method', arg1, arg2, etc)
@@ -89,22 +101,20 @@ process.stdin
     .toLowerCase()
     .toString()
     .toUpperCase()
-    .createHash('md5')
+    .createHash('md5');
 
   // Or as static methods:
-  stream.append('string')
-  stream.skip(10)
+  stream.append('string');
+  stream.skip(10);
   // etc
 
   // Consumers
   // When using as static methods pass the stream as the first argument.
   stream()
-    .count(function(resultObject) { })
-    .out() // pipes to stdout
+    .count(function(resultObject) { });
 
   // Or as static methods:
-  stream.count(process.stdin function(resultObject) { })
-  stream.out(process.stdin)
+  stream.count(process.stdin function(resultObject) { });
 ```
 
 ## Licence
