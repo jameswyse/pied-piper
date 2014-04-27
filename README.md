@@ -1,7 +1,8 @@
 ![pied-piper](https://raw.githubusercontent.com/jameswyse/pied-piper/master/docs/images/pied-piper.png)
 
 # pied-piper
-*Stream and pipeline utilities for node.js*
+*Stream and pipeline utilities for your node.js project.*
+
 
 ## Install
 ```bash
@@ -67,16 +68,16 @@ process.stdin
 
 ```javascript
   //
-  // Creates a new stream pipeline.
+  // Creates a new stream/pipeline.
   //
-  // Streams passed as arguments will be piped together.
+  // Streams passed as arguments will be piped together in order.
   // If no stream is provided it will create a through stream.
   //
   // The streams can be of any type so long as it makes sense to
-  // pipe them together. Eg: the 2nd and subsequent arguments
-  // should be writable and all but the last should be readable.
+  // pipe them together.
   //
-  // These would work:
+  // Eg: All but the last argument need to be readable and all but
+  // the first argument need to be writable.
   //
   var through   = stream();
   var pipeline  = stream(readable, transform, transform, writable);
