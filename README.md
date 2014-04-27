@@ -47,7 +47,7 @@ var makePretty = stream(
 process.stdin
   .pipe(getLines)
   .pipe(makePretty)
-  .pipe(process.stdOut);
+  .pipe(process.stdout);
 ```
 
 ## Quick & Dirty API Reference
@@ -58,14 +58,19 @@ process.stdin
   stream()
   stream(input, transform1, transform2, output);
 
-  // Inputs (not chainable)
-  stream.fromFile(filename);
-  stream.fromObject(object);
+  // Inputs
+  stream.readFile(filename);
+  stream.readObject(object);
+  stream.readArray(array);
+  stream.stdin();
 
-  // Outputs (not chainable)
-  stream.toFile(filename)
+  // Outputs
+  stream.writeFile(filename);
+  stream.stdout();
+  stream.stderr();
+  stream.collect(function(array) {});
 
-  // Transforms (chainable)
+  // Transforms
   stream()
     .append('string');
     .each(function(chunk) { })
@@ -82,13 +87,14 @@ process.stdin
     .toLowerCase()
     .toString()
     .toUpperCase()
+    .createHash('md5')
 
   // Or as static methods:
   stream.append('string')
   stream.skip(10)
   // etc
 
-  // Consumers (chainable)
+  // Consumers
   // When using as static methods pass the stream as the first argument.
   stream()
     .count(function(resultObject) { })
